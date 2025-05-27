@@ -1,0 +1,110 @@
+/* Envoltura general */
+.detalle-wrapper {
+    background: #f4f6f8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+/* Tarjeta principal */
+.detalle-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.detalle-title {
+    font-size: 28px;
+    text-align: center;
+    color: #1e88e5;
+    margin-bottom: 30px;
+}
+
+/* Grid de contenido */
+.detalle-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Imagen */
+.detalle-imagen img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    max-height: 300px;
+}
+
+/* Datos del equipo */
+.detalle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+    color: #333;
+}
+
+.detalle-info strong {
+    color: #000;
+}
+
+/* Botones */
+.detalle-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primario {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.btn-primario:hover {
+    background-color: #1565c0;
+}
+
+.btn-secundario {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+.btn-secundario:hover {
+    background-color: #bbdefb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .detalle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

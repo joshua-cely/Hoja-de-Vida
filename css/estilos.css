@@ -1,0 +1,221 @@
+/* estilos.css */
+
+/* ============= RESET BÁSICO ============= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============= TIPOGRAFÍA ============= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ============= CONTAINERS ============= */
+.dashboard-container,
+.detalle-container,
+.index-container,
+.equipos-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.dashboard-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============= TÍTULOS ============= */
+.dashboard-title,
+.index-title,
+.detalle-title,
+.equipos-title {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+}
+.index-text,
+.index-title {
+    display: flex;
+    text-align: center;
+}
+
+/* ============= BOTONES ============= */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    margin: 5px;
+    text-align: center;
+}
+
+.btn-primario {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primario:hover {
+    background-color: #2980b9;
+}
+
+.btn-secundario {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-secundario:hover {
+    background-color: #27ae60;
+}
+
+.btn-peligro {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-peligro:hover {
+    background-color: #c0392b;
+}
+
+/* ============= FORMULARIOS ============= */
+form {
+    margin: 20px 0;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+form input[type="submit"],
+form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form input[type="submit"]:hover,
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* ============= TABLAS ============= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: #3498db;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #e0f7fa;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 768px) {
+    .dashboard-container, .detalle-container, .index-container, .equipos-container {
+        padding: 20px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* ============= ESTILO ESPECÍFICO PARA INDEX ============= */
+.index-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to right, #f5f7fa, #dfe6e9);
+}
+
+.index-container {
+    display: block;
+    text-align: center;
+    align-items: center;
+}
+
+.index-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.index-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashboard-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Estilo mejorado para la sección de botones en el dashboard */
+.dashboard-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Mejora visual del título */
+.dashboard-title {
+    font-size: 30px;
+    color: #34495e;
+    margin-bottom: 30px;
+}
+
+/* Contenedor general con margen superior para que no quede pegado arriba */
+.dashboard-container {
+    margin-top: 50px;
+}
