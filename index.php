@@ -5,7 +5,7 @@
     <title>Hoja de Vida de Equipos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/estilos.css">
-    <script src="../js/script.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body class="index-page">
     <div class="index-container">
