@@ -1,124 +1,95 @@
 <?php
-require '../config/conexion.php';
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
+require_once '../controlador/EntradaControlador.php';
+require_once '../controlador/SalidaControlador.php';
 
+$entradaCtrl = new EntradaControlador();
+$salidaCtrl = new SalidaControlador();
 
-// Lógica para búsqueda
 $search = isset($_POST['search']) ? $_POST['search'] : '';
-
-
-// Consultas para obtener registros de entradas y salidas
-$entrada_sql = "SELECT e.id, e.responsable, c.numero_serie, c.marca, c.modelo 
-                FROM entradas e 
-                JOIN computadores c ON e.computador_id = c.id 
-                WHERE c.numero_serie LIKE ?";
-
-
-$salida_sql = "SELECT s.id, s.responsable, c.numero_serie, c.marca, c.modelo 
-                FROM salidas s 
-                JOIN computadores c ON s.computador_id = c.id 
-                WHERE c.numero_serie LIKE ?";
-
-
-$searchParam = "%$search%";
-
-
-// Preparar y ejecutar consultas
-$entrada_stmt = $conn->prepare($entrada_sql);
-$entrada_stmt->bind_param("s", $searchParam);
-$entrada_stmt->execute();
-$entrada_result = $entrada_stmt->get_result();
-
-
-$salida_stmt = $conn->prepare($salida_sql);
-$salida_stmt->bind_param("s", $searchParam);
-$salida_stmt->execute();
-$salida_result = $salida_stmt->get_result();
+$entrada_result = $entradaCtrl->listar($search);
+$salida_result = $salidaCtrl->listar($search);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registros de Entradas y Salidas</title>
-    <link rel="stylesheet" href="../css/equipos.css">
+    <title>Historial de Movimiento</title>
+    <link rel="stylesheet" href="../css/ver_registros.css">
 </head>
-<body>
+<body class="equipos-page">
     <div class="equipos-container">
-        <h2 class="equipos-title">Registros de Entradas y Salidas</h2>
-
+        <h2 class="equipos-title">Historial de Movimiento de Equipos</h2>
 
         <form method="POST" class="search-form">
-            <input type="text" name="search" placeholder="Buscar por placa" value="<?php echo htmlspecialchars($search); ?>">
+            <input type="text" name="search" placeholder="Buscar por número de serie" value="<?php echo htmlspecialchars($search); ?>">
             <input type="submit" value="Buscar">
         </form>
 
-
-        <h3>Entradas</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Número de Serie</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Responsable</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $entrada_result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['numero_serie']); ?></td>
-                    <td><?php echo htmlspecialchars($row['marca']); ?></td>
-                    <td><?php echo htmlspecialchars($row['modelo']); ?></td>
-                    <td><?php echo htmlspecialchars($row['responsable']); ?></td>
-                </tr>
-                <?php endwhile; ?>
+        <section class="registro-section">
+            <h3 class="registro-subtitle">Entradas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha Entrada</th>
+                        <th>Número de Serie</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $entrada_result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['id']); ?></td>
+                        <td><?php echo htmlspecialchars($row['fecha_entrada']); ?></td>
+                        <td><?php echo htmlspecialchars($row['numero_serie']); ?></td>
+                        <td><?php echo htmlspecialchars($row['marca']); ?></td>
+                        <td><?php echo htmlspecialchars($row['modelo']); ?></td>
+                        <td><?php echo htmlspecialchars($row['responsable']); ?></td>
+                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
-        </table>
+            </table>
+        </section>
 
-
-        <h3>Salidas</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Número de Serie</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Responsable</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $salida_result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['numero_serie']); ?></td>
-                    <td><?php echo htmlspecialchars($row['marca']); ?></td>
-                    <td><?php echo htmlspecialchars($row['modelo']); ?></td>
-                    <td><?php echo htmlspecialchars($row['responsable']); ?></td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-
+        <section class="registro-section">
+            <h3 class="registro-subtitle">Salidas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha Salida</th>
+                        <th>Número de Serie</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $salida_result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['id']); ?></td>
+                        <td><?php echo htmlspecialchars($row['fecha_salida']); ?></td>
+                        <td><?php echo htmlspecialchars($row['numero_serie']); ?></td>
+                        <td><?php echo htmlspecialchars($row['marca']); ?></td>
+                        <td><?php echo htmlspecialchars($row['modelo']); ?></td>
+                        <td><?php echo htmlspecialchars($row['responsable']); ?></td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </section>
 
         <div style="margin-top: 30px;">
-            <a href="dashboard.php" class="btn btn-primario">Volver al Dashboard</a>
+            <a href="../controlador/Iniciar_dashboard.php" class="btn btn-primario">Volver al Dashboard</a>
         </div>
     </div>
 </body>
 </html>
 
-
 <?php
-// Cerrar conexiones
 $entrada_stmt->close();
 $salida_stmt->close();
 $conn->close();

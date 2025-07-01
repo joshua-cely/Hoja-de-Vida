@@ -1,0 +1,250 @@
+/* === LOGIN.CSS === */
+body.form-page {
+    background-color: #1e1e2b;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #2b2b3d;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.7rem;
+    color: #00cec9;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    color: #b2bec3;
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 0.6rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #393950;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: 2px solid #00cec9;
+    background-color: #44445d;
+}
+
+.btn {
+    padding: 0.5rem 1.2rem;
+    background-color: #00b894;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #009f82;
+}
+
+/* === VER_EQUIPOS.CSS === */
+body.equipos-page {
+    background-color: #1e1e2b;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 2rem;
+}
+
+.equipos-container {
+    max-width: 1100px;
+    margin: auto;
+    background-color: #2c2c3c;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.equipos-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #00cec9;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.search-form input[type="text"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #393950;
+    color: #fff;
+    width: 280px;
+    font-size: 1rem;
+}
+
+.search-form input[type="submit"] {
+    background-color: #00b894;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #009f82;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #393950;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+thead {
+    background-color: #2b2b3d;
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    color: #00cec9;
+    border-bottom: 1px solid #444;
+}
+
+tbody td {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid #444;
+    vertical-align: middle;
+}
+
+tr:hover {
+    background-color: #44445d;
+    transition: background 0.2s ease-in-out;
+}
+
+.acciones {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.btn-primario {
+    background-color: #0984e3;
+}
+
+.btn-primario:hover {
+    background-color: #0766c5;
+}
+
+.btn-secundario {
+    background-color: #636e72;
+}
+
+.btn-secundario:hover {
+    background-color: #4b5356;
+}
+
+.btn-peligro {
+    background-color: #d63031;
+}
+
+.btn-peligro:hover {
+    background-color: #c0392b;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.footer-nav {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-nav a {
+    font-size: 0.95rem;
+    color: #00cec9;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: #00b894;
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .acciones {
+        justify-content: center;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody td {
+        padding: 0.6rem;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #444;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #00cec9;
+    }
+}

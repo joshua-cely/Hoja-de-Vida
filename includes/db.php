@@ -1,13 +1,20 @@
 <?php
-$host = "localhost";
-$usuario = "root";
-$clave = "";
-$bd = "inventario";
+if (!class_exists('Database')) {
+    class Database {
+        private $host = "localhost";
+        private $user = "root";
+        private $pass = "";
+        private $dbname = "inventario";
+        private $conn;
 
-$conn = new mysqli($host, $usuario, $clave, $bd);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+        public function getConnection() {
+            if (!$this->conn) {
+                $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->dbname);
+                if ($this->conn->connect_error) {
+                    die("Conexión fallida: " . $this->conn->connect_error);
+                }
+            }
+            return $this->conn;
+        }
+    }
 }
-?>

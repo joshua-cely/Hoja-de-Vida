@@ -1,28 +1,35 @@
 <?php
-require '../config/conexion.php';
+require '../includes/db.php';
+
+class Usuario {
+    private $conn;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    public function agregarUsuario($data) {
+        $stmt = $this->conn->prepare("INSERT INTO usuarios (nombre, usuario, contrasena, rol) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $data['nombre'], $data['usuario'], $data['contrasena'], $data['rol']);
+        return $stmt->execute();
+    }
+}
+
+$db = new Database();
+$usuarioModel = new Usuario($db->getConnection());
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['nombre'];
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena']; // Almacenar la contraseña tal como se ingresa
-    $rol = $_POST['rol'];
+    $data = [
+        'nombre' => $_POST['nombre'],
+        'usuario' => $_POST['usuario'],
+        'contrasena' => $_POST['contrasena'],
+        'rol' => $_POST['rol']
+    ];
 
-    // Insertar en la base de datos
-    $stmt = $conn->prepare("INSERT INTO usuarios (nombre, usuario, contrasena, rol) VALUES (?, ?, ?, ?)");
-    
-    if ($stmt === false) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
-
-    $stmt->bind_param("ssss", $nombre, $usuario, $contrasena, $rol); // Almacenar la contraseña sin hash
-
-    if ($stmt->execute()) {
-        echo "✅ Usuario guardado correctamente. <br><a href='../vista/agregar_usuario.php'>Agregar otro</a> | <a href='../vista/dashboard.php'>Volver al Dashboard</a>";
+    if ($usuarioModel->agregarUsuario($data)) {
+        echo "✅ Usuario guardado correctamente.";
     } else {
-        echo "❌ Error al guardar usuario: " . $stmt->error;
+        echo "❌ Error al guardar usuario.";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

@@ -1,10 +1,14 @@
+<?php if (isset($_GET['error'])): ?>
+<p style="color:red;">❌ Usuario o contraseña incorrectos</p>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/login.css">
     <script src="js/script.js" defer></script>
 </head>
 <body class="form-page">

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Usuario</title>
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/usuario.css">
 </head>
 <body class="form-page">
     <div class="form-container">
         <h2 class="form-title">Agregar Nuevo Usuario</h2>
-        <form action="../controlador/procesar_usuario.php" method="POST" class="form-grid">
+        <form action="../controlador/UsuarioControlador.php" method="POST" class="form-grid">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" required>
@@ -35,9 +35,9 @@
 
             <div class="form-actions">
                 <input type="submit" value="Guardar Usuario" class="btn btn-primario">
-                <a href="../vista/dashboard.php" class="btn btn-secundario">Cancelar</a>
+                <a href="../controlador/Iniciar_dashboard.php" class="btn btn-secundario">Cancelar</a>
             </div>
         </form>
     </div>
-</body>
+</body> 
 </html>

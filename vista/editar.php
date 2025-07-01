@@ -1,25 +1,5 @@
 <?php
-require '../config/conexion.php';
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
-$sql = "SELECT * FROM computadores WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    echo "No se encontró el equipo.";
-    exit();
-}
-
-$equipo = $result->fetch_assoc();
+require '../controlador/editar_equipo_control.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +7,7 @@ $equipo = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>Editar Equipo</title>
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/editar.css">
 </head>
 <body class="form-page">
     <div class="form-container">
@@ -132,7 +112,7 @@ $equipo = $result->fetch_assoc();
 
             <div class="form-actions">
                 <input type="submit" value="Actualizar equipo" class="btn btn-primario">
-                <a href="dashboard.php" class="btn btn-secundario">Cancelar</a>
+                <a href="../controlador/Iniciar_dashboard.php" class="btn btn-secundario">Cancelar</a>
             </div>
         </form>
     </div>

@@ -1,40 +1,22 @@
 <?php
-require '../config/conexion.php';
+require_once '../includes/db.php';
+require_once '../modelo/Equipo.php';
+require_once 'EquipoControlador.php';
+
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
+    $id = (int) $_POST['id'];
+    $controlador = new EquipoControlador();
 
-    if ($id <= 0) {
-        die("ID inválido para eliminar.");
-    }
-
-    // Preparar la consulta para eliminar el equipo
-    $sql = "DELETE FROM computadores WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
-
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-        // Redireccionar a la lista de equipos después de eliminar
-        header("Location: ../vista/ver_equipos.php?msg=Equipo eliminado correctamente");
+    if ($controlador->eliminarEquipo($id)) {
+        header("Location: ../vista/ver_equipos.php");
         exit();
     } else {
-        echo "❌ Error al eliminar el equipo: " . $stmt->error;
+        echo "❌ Error al eliminar el equipo.";
     }
-
-    $stmt->close();
-    $conn->close();
 } else {
-    echo "Acceso no autorizado.";
+    header("Location: ../vista/ver_equipos.php");
+    exit();
 }
 ?>
-

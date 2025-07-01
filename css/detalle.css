@@ -1,110 +1,122 @@
-/* Envoltura general */
-.detalle-wrapper {
-    background: #f4f6f8;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
+/* Estilo general */
+body.detalle-page {
+    background-color: #1e1e2b;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 2rem;
 }
 
-/* Tarjeta principal */
-.detalle-card {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 16px;
-    max-width: 900px;
-    width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+/* Contenedor principal */
+.detalle-wrapper {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #2a2a3c;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
 }
 
 /* Título */
 .detalle-title {
-    font-size: 28px;
     text-align: center;
-    color: #1e88e5;
-    margin-bottom: 30px;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+    color: #ffffff;
 }
 
-/* Grid de contenido */
+/* Grid de imagen e información */
 .detalle-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 30px;
-    align-items: start;
-}
-
-/* Imagen */
-.detalle-imagen img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    object-fit: cover;
-    max-height: 300px;
-}
-
-/* Datos del equipo */
-.detalle-info {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-size: 16px;
-    color: #333;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
 }
 
-.detalle-info strong {
-    color: #000;
+/* Imagen del equipo */
+.detalle-imagen img {
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #1c1c28;
+    padding: 0.5rem;
 }
 
-/* Botones */
+/* Información del equipo */
+.detalle-info {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Estilo de cada dato */
+.detalle-dato {
+    background-color: #3a3a4f;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones inferiores */
 .detalle-buttons {
-    margin-top: 30px;
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
+/* Botones generales */
 .btn {
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
     font-weight: bold;
-    font-size: 15px;
-    transition: background 0.3s ease;
+    text-decoration: none;
     display: inline-block;
     text-align: center;
+    transition: background 0.3s;
 }
 
+/* Botón primario */
 .btn-primario {
-    background-color: #1e88e5;
+    background-color: #00b894;
     color: white;
 }
 
 .btn-primario:hover {
-    background-color: #1565c0;
+    background-color: #019875;
 }
 
+/* Botón secundario */
 .btn-secundario {
-    background-color: #e3f2fd;
-    color: #0d47a1;
+    background-color: #636e72;
+    color: white;
 }
 
 .btn-secundario:hover {
-    background-color: #bbdefb;
+    background-color: #4a5254;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .detalle-grid {
+    .detalle-info {
         grid-template-columns: 1fr;
     }
 
-    .detalle-buttons {
+    .detalle-grid {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
     }
 
-    .btn {
+    .detalle-imagen img {
         width: 100%;
+        max-width: 300px;
     }
 }

@@ -1,34 +1,26 @@
 <?php
+require_once '../controlador/UsuarioControlador.php';
 session_start();
-require '../config/conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
 
-    // Consulta para verificar el usuario
-    $stmt = $conn->prepare("SELECT contrasena FROM usuarios WHERE usuario = ?");
-    $stmt->bind_param("s", $usuario);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $controlador = new UsuarioControlador();
+    $datos = $controlador->login($usuario, $contrasena);
 
-    // Verificar si se encontró un usuario
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $stored_password = $row['contrasena'];
+    if ($datos) {
+    session_start();
+    $_SESSION['usuario'] = $datos['usuario'];
+    $_SESSION['rol'] = $datos['rol'];
+    $_SESSION['nombre'] = $datos['nombre']; // Asegúrate de tener esto
+    $_SESSION['usuario_id'] = $datos['id']; // Necesario para el dashboard
 
-        // Comparar la contraseña ingresada con la almacenada
-        if ($contrasena === $stored_password) {
-            $_SESSION['usuario'] = $usuario;
-            header("Location: ../vista/dashboard.php");
-        } else {
-            echo "Contraseña incorrecta.";
-        }
-    } else {
-        echo "Usuario no encontrado.";
-    }
-
-    $stmt->close();
+    header("Location: ../controlador/iniciar_dashboard.php");
+    exit();
+} else {
+    header("Location: ../vista/login.php?error=1");
+    exit();
 }
-$conn->close();
+}
 ?>

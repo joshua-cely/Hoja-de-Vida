@@ -6,7 +6,10 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // Obtener computadores para el select
-require '../config/conexion.php';
+require '../includes/db.php';
+$db = new Database();
+$conn = $db->getConnection();
+
 $sql = "SELECT id, marca, modelo FROM computadores";
 $result = $conn->query($sql);
 ?>
@@ -16,7 +19,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Registrar Entrada</title>
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/entrada.css">
 </head>
 <body class="form-page">
     <div class="form-container">
@@ -34,7 +37,7 @@ $result = $conn->query($sql);
 
             <div class="form-actions">
                 <input type="submit" value="Registrar Entrada" class="btn btn-primario">
-                <a href="../vista/dashboard.php" class="btn btn-secundario">Cancelar</a>
+                <a href="../controlador/Iniciar_dashboard.php" class="btn btn-secundario">Cancelar</a>
             </div>
         </form>
     </div>

@@ -1,40 +1,5 @@
 <?php
-require '../config/conexion.php';
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../vista/login.php");
-    exit();
-}
-
-$usuario = $_SESSION['usuario'];
-$sql = "SELECT rol FROM usuarios WHERE usuario = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$rol = $row['rol'];
-
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
-// Obtener información del equipo
-$sql = "SELECT * FROM computadores WHERE id = ?";
-$stmt = $conn->prepare($sql);
-
-if ($stmt === false) {
-    die("Error en la preparación de la consulta: " . $conn->error);
-}
-
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    echo "No se encontró el equipo.";
-    exit();
-}
-
-$equipo = $result->fetch_assoc();
+require '../controlador/detalle_equipo_control.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">

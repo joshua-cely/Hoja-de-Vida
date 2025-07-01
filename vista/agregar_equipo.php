@@ -1,34 +1,10 @@
-<?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Obtener el rol del usuario
-require '../config/conexion.php';
-$usuario = $_SESSION['usuario'];
-$sql = "SELECT rol FROM usuarios WHERE usuario = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$rol = $row['rol'];
-
-if ($rol != 'admin') {
-    header("Location: ver_equipos.php"); // Redirigir a ver equipos si no es admin
-    exit();
-}
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Agregar Equipo</title>
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/agregar_equipo.css">
 </head>
 <body class="form-page">
     <div class="form-container">
@@ -133,7 +109,7 @@ if ($rol != 'admin') {
 
             <div class="form-actions">
                 <input type="submit" value="Guardar equipo" class="btn btn-primario">
-                <a href="../vista/dashboard.php" class="btn btn-secundario">Cancelar</a>
+                <a href="../controlador/iniciar_dashboard.php" class="btn btn-secundario">Cancelar</a>
             </div>
         </form>
     </div>
